@@ -33,8 +33,14 @@ public class MainActivity extends AppCompatActivity {
                        Log.d("NET", response);
                         try {
                             JSONArray array = new JSONArray(response);
-                            JSONObject obj = array.getJSONObject(0);
-                            Log.d("NET", "Name:" + obj.getString("NAME"));
+
+                            for (int i = 0; i < array.length(); i++)
+                            {
+                                JSONObject obj = array.getJSONObject(i);
+                                Log.d("NET", "Name:" + obj.getString("NAME") + " Addr:" + obj.getString("ADDRESS"));
+
+                            }
+
 
 
 
