@@ -9,10 +9,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                        Log.d("NET", response);
-                        try {
+
+                            /*
                             JSONArray array = new JSONArray(response);
 
                             for (int i = 0; i < array.length(); i++)
@@ -40,13 +45,19 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d("NET", "Name:" + obj.getString("NAME") + " Addr:" + obj.getString("ADDRESS"));
 
                             }
+                            */
+                        Gson gson = new Gson();
+                        ArrayList<ParkingLot> mylist = gson.fromJson(response, new TypeToken<ArrayList<ParkingLot>>() {}.getType());
 
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        for (ParkingLot p : mylist)
+                        {
+                            Log.d("NET", p.NAME + "," + p.ADDRESS);
                         }
+
+
+
+
+
 
 
                     }
